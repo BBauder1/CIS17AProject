@@ -1,0 +1,94 @@
+//Brandon Bauder
+//
+//Pseudo code for coffee shop 
+
+
+//functions needed:
+main function 
+coffee menu/ order function 
+food menu/ order function
+recipt function // to print recipt
+sort function/ swap function
+search function
+
+main
+{
+  drink name array
+  drink price array
+  food name array
+  food price array
+  
+  totalDrink vector //store items chosen
+  totalcosts vector // store prices chosen
+  
+  int choice //for choosing between coffee or food
+  string input // for selecting item wanted
+  char in // input for while loop to continue ordering
+  double totalprice // adding up costs
+  
+  sort call for names/price
+  
+  display welcome screen 
+  
+  do
+  {
+    display option for drink or food
+    cin choice
+    
+    while(choice is not 1 or 2)
+    repeat cin until correct answer;
+    
+    if(user chooses option for drink)
+    call drink function;
+    
+    else if(user chooses option for food)
+    call food function;
+    
+    store vectors used;
+    
+    display order so far
+    display for continue for loop
+    cin in;
+  }while(user says yes "Y")
+  
+  call recipt function
+  
+  display order
+  
+  display message for user for ordering
+  
+  return 0;
+}
+
+ 
+  
+  sort function{}
+  swap function{}
+  search function{}
+  
+  coffee function/ food function //both functions will act the same
+  {
+    reuses the appropriate array
+    displays the menu
+    sort call for names/price
+    
+    display option for item
+    string input 
+    
+    call search function
+    
+    while(item not found)
+    reenter and retry for item
+    call search;
+    
+    return item
+  }
+  
+  
+  reciept function
+  {
+    prints items with price saved on vector
+    prints total
+    print message for recipt 
+    print onto text file
+  }
