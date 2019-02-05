@@ -41,7 +41,7 @@ do
   {
     displayMenu();
     cin >> userInput;
-    while(usesrInput < 0 || userInput > 3)
+    while(userInput < 0 || userInput > 3)
     {
     cout << "Regrettably,  that is not one of the options.\n";
     cout << "Please enter an option 1-3: ";
@@ -81,7 +81,7 @@ void displayMenu()
 
 void displayFoods()
 {
-  displayMenuOrder(itemName, itemPrice, 0);
+  displayMenuOrder(/*itemName*/items, itemPrice, 0); //Brandon edit
 }
 
 void displayDrinks()
@@ -109,7 +109,7 @@ void displayReceipt()
 
 }
 
-void saveData
+void saveData()
 { //save all data into file
 
 }
