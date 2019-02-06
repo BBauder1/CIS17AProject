@@ -23,7 +23,7 @@ void receiptCreate(const string[][col], const double [][col], const int[][col]);
 void saveData();
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
-string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","Muffin","Cake"}};
+string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","English Muffin","Cake"}};
 double itemPrice[row][col] = {{3.65,2.95 ,3.94 }, {1.50, 1.65, 4.00}};
 //int orderNum[row][col];
 vector<string> storeItem;
@@ -50,8 +50,8 @@ do
     cout << "Regrettably,  that is not one of the options.\n";
     cout << "Please enter an option 1-3: ";
     cin >> userInput;
-    //change this to switch statement
     }
+    //change this to switch statement
     if (userInput == 3)
     {
       displayReceipt();
@@ -78,8 +78,8 @@ void displayMenu()
 {
  
   cout << "Select a menu associated with the number it coresponds to." << endl;
-  cout << "1.Drink" << endl;
-  cout << "2 Food" << endl;
+  cout << "1.Food" << endl;
+  cout << "2 Drinks" << endl;
   cout << "3.Done Ordering" << endl;
   cout << "0. Exit" << endl;
   cout << "Now, your choice?  ";
@@ -87,12 +87,14 @@ void displayMenu()
 
 void displayFoods()
 {
-  displayMenuOrder(items, itemPrice, 0); 
+  cout << "Food" << endl; //Alberto edit
+  displayMenuOrder(items, itemPrice, 1); 
 }
 
 void displayDrinks()
 {
-  displayMenuOrder(items, itemPrice, 1);
+  cout << "Drinks" << endl;
+  displayMenuOrder(items, itemPrice, 0);
 }
 
 void displayMenuOrder(const string item[][col], const double price[][col], int row)
@@ -103,7 +105,7 @@ void displayMenuOrder(const string item[][col], const double price[][col], int r
     cout << (i + 1) << "." << setw(20) << left << item[row][i] << "\t\t\t\t\t$" << price[row][i] << endl;
   }
   cout << "4. Return to Main Menu" << endl;
-  cout << "5. End Order" << endl;
+  cout << "5. End Order" << endl; // Implement: end order option*
   cout << "Your choice?  ";
 }
 void receiptCreate(const string menu[][col], const double price[][col], const int num[][col])
