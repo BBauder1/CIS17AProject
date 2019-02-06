@@ -82,7 +82,7 @@ do
 void displayMenu()
 {
  
-  cout << "Select a menu associated with the number it coresponds to." << endl;
+  cout << "Select a menu associated with the number it corresponds to." << endl;
   cout << "1.Drink" << endl;
   cout << "2 Food" << endl;
   cout << "3.Done Ordering" << endl;
