@@ -23,12 +23,12 @@ void receiptCreate(const string[][col], const double [][col], const int[][col]);
 void saveData();
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
-string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","Muffin","Cake"}};
+string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","English Muffin","Cake"}};
 double itemPrice[row][col] = {{3.65,2.95 ,3.94 }, {1.50, 1.65, 4.00}};
 //int orderNum[row][col];
 int count = 0;
-vector<string> storeItem;
-vector<int> storePrice; 
+vector<string> storeItem; //Can use pointer or reference or nested for loop
+vector<int> storePrice;   //Can use pointer or reference or nested for loop
 double totalAccumulator = 0;
 static int itemCount = 0;
 const double TAX = 0.085;
