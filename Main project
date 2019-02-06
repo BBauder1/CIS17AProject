@@ -11,6 +11,8 @@
 #include <vector>
 #include <iomanip>
 #include <stdlib.h>
+#include <cctype>
+#include <limits>
 using namespace std;
 
 const int row = 2, col = 3;
@@ -23,19 +25,22 @@ void receiptCreate(const string[][col], const double [][col], const int[][col]);
 void saveData();
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
-string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","English Muffin","Cake"}};
+string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","Muffin","Cake"}};
 double itemPrice[row][col] = {{3.65,2.95 ,3.94 }, {1.50, 1.65, 4.00}};
 //int orderNum[row][col];
-int count = 0;
-vector<string> storeItem; //Can use pointer or reference or nested for loop
-vector<int> storePrice;   //Can use pointer or reference or nested for loop
+vector<string> storeItem;
+vector<double> storePrice; 
+vector<int> storeNumber;
 double totalAccumulator = 0;
 static int itemCount = 0;
 const double TAX = 0.085;
 int numWanted;
+int count;
 
 int main()
 {
+double cost;
+string input;
 int choice;
 int userInput;
 double totalPrice = 0.0;
@@ -58,9 +63,19 @@ do
     {
       case 1 :displayDrinks();
               cin >> userInput;
-              choice = userInput;
-              storeItem[] = items[0][choice];
-              
+              choice = userInput - 1;
+              input = items[0][choice];
+              storeItem.push_back(input);
+              cout << "\nHow many of this would you like? : ";
+              while(!(cin >> count) || cin.peek() != '\n')
+              {
+               	cout << "That's not valid input. Try again: ";
+		            cin.clear();
+		            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+              }
+              storeNumber.push_back(count);
+              cost = itemPrice[0][choice] * count;
+              storePrice.push_back(cost);
              break;
 
       case 2 :displayFoods();
@@ -73,9 +88,7 @@ do
       break;
     }
     cout << endl;
-    count++;
   }while(userInput != 0);
-  cout << storeItem[0];
   return 0;
 }
 
