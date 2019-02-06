@@ -23,9 +23,11 @@ void receiptCreate(const string[][col], const double [][col], const int[][col]);
 void saveData();
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
-string items[row][col] = {{, , }, {, , }};
-double itemPrice[row][col] = {{, , }, {, , }};
-int orderNum[row][col];
+string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","Muffin","Cake"}};
+double itemPrice[row][col] = {{3.65,2.95 ,3.94 }, {1.50, 1.65, 4.00}};
+//int orderNum[row][col];
+vector<string> storeItem;
+vector<int> storePrice; 
 double totalAccumulator = 0;
 static int itemCount = 0;
 const double TAX = 0.085;
@@ -37,15 +39,18 @@ double totalPrice = 0.0;
 int numWanted;
 //Program Start//
 cout << fixed << setprecision(2) << showpoint;
+ cout << "Welcome to the Velvet Cafe." << endl;
 do
   {
     displayMenu();
     cin >> userInput;
+    cout << endl;
     while(userInput < 0 || userInput > 3)
     {
     cout << "Regrettably,  that is not one of the options.\n";
     cout << "Please enter an option 1-3: ";
     cin >> userInput;
+    //change this to switch statement
     }
     if (userInput == 3)
     {
@@ -57,23 +62,24 @@ do
     {
       displayFoods();
       cin >> userInput;
+      userInput -= 1;
     }
     else if(userInput ==2)
     {
       displayDrinks();
       cin >> userInput;
     }
-
+    cout << endl;
   }while(userInput != 0);
   return 0;
 }
 
 void displayMenu()
 {
-  cout << "Welcome to the Velvet Cafe." << endl;
+ 
   cout << "Select a menu associated with the number it coresponds to." << endl;
-  cout << "1.Food" << endl;
-  cout << "2 Drink" << endl;
+  cout << "1.Drink" << endl;
+  cout << "2 Food" << endl;
   cout << "3.Done Ordering" << endl;
   cout << "0. Exit" << endl;
   cout << "Now, your choice?  ";
@@ -81,15 +87,15 @@ void displayMenu()
 
 void displayFoods()
 {
-  displayMenuOrder(/*itemName*/items, itemPrice, 0); //Brandon edit
+  displayMenuOrder(items, itemPrice, 0); 
 }
 
 void displayDrinks()
 {
-
+  displayMenuOrder(items, itemPrice, 1);
 }
 
-void displayMenuOrder(const string item[][col], const double price[][col], int row);
+void displayMenuOrder(const string item[][col], const double price[][col], int row)
 {
   cout << setw(20) << left << "ITEM" << "\t\t\t\t\tPRICE" << endl;
   for (int i = 0; i < 3; i++)
