@@ -20,7 +20,7 @@ void displayMenu();
 void displayFoods();
 void displayDrinks();
 void displayMenuOrder(const string[][col], const double[][col], int);
-void displayReceipt();
+void displayReceipt(int);
 void receiptCreate(const string[][col], const double [][col], const int[][col]);
 void saveData();
 // Global values for food and drink items & prices
@@ -92,6 +92,7 @@ do
               cout << "\nWould you like to order another drink?(Y for yes):";
               cin >> check;
               cout << endl;
+              i++;
              }while (check == 'Y' || check == 'y');
              break;
              
@@ -123,15 +124,14 @@ do
               cout << "\nWould you like to order another item?(Y for yes):";
               cin >> check;
               cout << endl;
+              i++;
              }while (check == 'Y' || check == 'y');
               break;
-      case 3:displayReceipt();
+      case 3:displayReceipt(i);
               return 0;
               break;
-      default: cout << " ";
-      break;
-
-      i++;
+      // default: cout << " ";
+      // break;
     }
     cout << endl;
   }while(userInput != 0);
@@ -174,9 +174,19 @@ void receiptCreate(const string menu[][col], const double price[][col], const in
 { //create vector to hold items & prices for receipt
 
 }
-void displayReceipt()
+void displayReceipt(int i)
 { //Show user their order
+  double sum;
+  for(int n = 0; n < i; n++)
+  {
+    cout << storeItem[n] << "   " << storeNumber[n] << endl;
+  }
 
+  for(int n = 0; n < i; n++)
+  {
+    sum += storePrice[n];
+  }
+  cout << "$" << sum << endl;
 }
 
 void saveData()
