@@ -21,8 +21,6 @@ void displayFoods();
 void displayDrinks();
 void displayMenuOrder(const string[][col], const double[][col], int);
 void displayReceipt(int);
-void receiptCreate(const string[][col], const double [][col], const int[][col]);
-void saveData();
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
 string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","Muffin","Cake"}};
@@ -156,8 +154,6 @@ do
       //for order to end/show receipt
       case 3:displayReceipt(i);
               return 0;
-      // default: cout << " ";
-      // break;
     }
     cout << endl;
   }while(userInput != 0); //to have user continue to order
@@ -195,11 +191,6 @@ void displayMenuOrder(const string item[][col], const double price[][col], int r
   cout << "4. Return to Main Menu" << endl;
   cout << "5. End Order" << endl;
   cout << "Your choice?  ";
-}
-
-void receiptCreate(const string menu[][col], const double price[][col], const int num[][col])
-{ //create vector to hold items & prices for receipt
-
 }
 
 void displayReceipt(int i)
@@ -245,9 +236,4 @@ void displayReceipt(int i)
   //output to file
   outputfile << setprecision(2) << fixed << "TOTAL\t\t\t\t\t\t\t\t$" << sum << endl;
   outputfile.close();
-}
-
-void saveData()
-{ //save all data into file
-
 }
