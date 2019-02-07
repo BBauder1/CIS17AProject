@@ -37,6 +37,8 @@ const double TAX = 0.085;
 int numWanted;
 int count;
 
+ofstream outputfile;
+
 int main()
 {
 char check;
@@ -51,6 +53,11 @@ cout << fixed << setprecision(2) << showpoint;
  cout << "Welcome to the Velvet Cafe." << endl;
 do
   {
+    if (userInput == 5)
+    {
+      displayReceipt(i);
+      return 0;
+    }
     displayMenu();
     cin >> userInput;
     cout << endl;
@@ -65,28 +72,38 @@ do
 
     switch(userInput)
     {
+      //for Drink menu
       case 1 :do
              {
                displayDrinks();
               cin >> userInput;
-              while(!cin)
+              while(!cin || userInput < 1 || userInput > 5) //to check for number input
               {
                	cout << "That's not valid input. Try again: ";
 		            cin.clear();
 		            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cin >> userInput;
               }
+              if(userInput == 4)//to return to main menu
+              {
+                break;
+              }
+              else if(userInput == 5)//to end order
+             {
+               userInput = 5;
+               break;
+             }
               choice = userInput - 1;
               input = items[0][choice];
               storeItem.push_back(input);
               cout << "\nHow many of this would you like? : ";
-              while(!(cin >> count) || cin.peek() != '\n')
+              while(!(cin >> count) || cin.peek() != '\n') //check for number input
               {
                	cout << "That's not valid input. Try again: ";
 		            cin.clear();
 		            cin.ignore(numeric_limits<streamsize>::max(), '\n');
               }
-              storeNumber.push_back(count);
+              storeNumber.push_back(count); //store into vector
               cost = itemPrice[0][choice] * count;
               storePrice.push_back(cost);
               cout << "\nWould you like to order another drink?(Y for yes):";
@@ -96,18 +113,27 @@ do
              }while (check == 'Y' || check == 'y');
              break;
              
-
+      //for food menu
       case 2 :do
              {
                displayFoods();
               cin >> userInput;
-              while(!cin)
+              while(!cin|| userInput < 1 || userInput > 5)
               {
                	cout << "That's not valid input. Try again: ";
 		            cin.clear();
 		            cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cin >> userInput;
               }
+              if(userInput == 4)
+              {
+                break;
+              }
+              else if(userInput == 5)
+             {
+               userInput = 5;
+               break;
+             }
               choice = userInput - 1;
               input = items[1][choice];
               storeItem.push_back(input);
@@ -127,14 +153,14 @@ do
               i++;
              }while (check == 'Y' || check == 'y');
               break;
+      //for order to end/show receipt
       case 3:displayReceipt(i);
               return 0;
-              break;
       // default: cout << " ";
       // break;
     }
     cout << endl;
-  }while(userInput != 0);
+  }while(userInput != 0); //to have user continue to order
   return 0;
 }
 
@@ -170,23 +196,55 @@ void displayMenuOrder(const string item[][col], const double price[][col], int r
   cout << "5. End Order" << endl;
   cout << "Your choice?  ";
 }
+
 void receiptCreate(const string menu[][col], const double price[][col], const int num[][col])
 { //create vector to hold items & prices for receipt
 
 }
+
 void displayReceipt(int i)
 { //Show user their order
   double sum;
+
+  outputfile.open("Receipt.text");
+  //output to screen
+  cout << endl << endl;
+  cout << "\t\t\tVelvet Cafe " << endl;
+  cout << "----------------------------------" << endl;
   for(int n = 0; n < i; n++)
   {
-    cout << storeItem[n] << "   " << storeNumber[n] << endl;
+    cout << storeNumber[n] << "\t" << setw(10) << storeItem[n] << "\t\t\t\t$" << storePrice[n] << endl;
+  }
+
+  //output to file
+  outputfile << "\t\t\tVelvet Cafe " << endl;
+  outputfile << "----------------------------------" << endl;
+  for (int n = 0; n < i; n++)
+  {
+    outputfile << storeNumber[n] << "\t" << setw(10) << storeItem[n] << "\t\t\t\t$" << setprecision(2) << fixed << storePrice[n] << endl;
   }
 
   for(int n = 0; n < i; n++)
   {
     sum += storePrice[n];
   }
-  cout << "$" << sum << endl;
+  //output to screen
+  cout << endl;
+  cout << "SUBTOTAL\t\t\t\t\t$" << sum << endl;
+  cout << "TAX\t\t\t\t\t\t\t 8.5%" << endl;
+
+  //output to file
+  outputfile << endl;
+  outputfile << "SUBTOTAL\t\t\t\t\t\t$" << sum << endl;
+  outputfile << "TAX\t\t\t\t\t\t\t\t\t 8.5%" << endl;
+
+  sum = (sum * TAX) + sum;
+  //output to screen
+  cout << "TOTAL\t\t\t\t\t\t$" << sum << endl;
+
+  //output to file
+  outputfile << setprecision(2) << fixed << "TOTAL\t\t\t\t\t\t\t\t$" << sum << endl;
+  outputfile.close();
 }
 
 void saveData()
