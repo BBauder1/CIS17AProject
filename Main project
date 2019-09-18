@@ -23,8 +23,8 @@ void displayMenuOrder(const string[][col], const double[][col], int);
 void displayReceipt(int);
 // Global values for food and drink items & prices
 // So they can be referenced throughout the program as needed.
-string items[row][col] = {{"Cappuccino","Latte" ,"Espresso" }, {"Biscotti","English Muffin","Butter Croissant"}};
-double itemPrice[row][col] = {{3.65,2.95 ,3.94 }, {1.50, 1.65, 1.75}};
+string items[row][col] = {{"Biscotti","English Muffin","Butter Croissant"}, {"Cappuccino","Latte" ,"Espresso" }};
+double itemPrice[row][col] = {{1.50, 1.65, 1.75}, {3.65,2.95 ,3.94 }};
 // Empty vectors to hold items to be placed in the receipt
 vector<string> storeItem;
 vector<double> storePrice; 
@@ -65,7 +65,7 @@ do
     cout << "Regrettably, that is not one of the options.\n";
     cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Enter an option between 1-3: ";
+    cout << "Enter an option between 1-3: " << endl;
     cin >> userInput;
     }
 
@@ -74,7 +74,7 @@ do
       //for food menu
       case 1 :do
              {
-               displayFoods();
+              displayFoods();
               cin >> userInput;
               while(!cin || userInput < 1 || userInput > 5) //to check for number input
               {
@@ -94,7 +94,7 @@ do
               choice = userInput - 1;
               input = items[0][choice];
               storeItem.push_back(input);
-              cout << "\nHow many will you be purchasing? ";
+              cout << "\nHow many will you be purchasing? " << endl;
               while(!(cin >> count) || cin.peek() != '\n') //check for number input
               {
                	cout << "That is not possible. Try again ";
@@ -147,7 +147,7 @@ do
               cost = itemPrice[1][choice] * count;
               storePrice.push_back(cost);
               cout << "\nWill you be ordering another item?" << endl;
-              cout <<"Enter Y or y to order another item.";
+              cout <<"Enter Y or y to order another item." << endl;
               cin >> check;
               cout << endl;
               i++;
@@ -167,20 +167,20 @@ void displayMenu()
   cout << "----------------------------------------------------------" << endl;
   cout << "Select a menu from the options we have provided." << endl;
   cout << "1. Food" << endl;
-  cout << "2. Drinks" << endl;
+  cout << "2. Drink" << endl;
   cout << "3. Finish Ordering" << endl;
   cout << "0. Exit" << endl;
-  cout << "Now, your choice?  ";
+  cout << "Now, your choice?  " << endl;
 }
 
 void displayFoods()
 {
-  displayMenuOrder(items, itemPrice, 1); 
+  displayMenuOrder(items, itemPrice, 0); 
 }
 
 void displayDrinks()
 {
-  displayMenuOrder(items, itemPrice, 0);
+  displayMenuOrder(items, itemPrice, 1);
 }
 
 void displayMenuOrder(const string item[][col], const double price[][col], int row)
@@ -193,7 +193,7 @@ void displayMenuOrder(const string item[][col], const double price[][col], int r
   }
   cout << "4. Return to Main Menu" << endl;
   cout << "5. End Order" << endl;
-  cout << "Your choice?  ";
+  cout << "Your choice?  " << endl;
 }
 
 void displayReceipt(int i)
@@ -207,7 +207,7 @@ void displayReceipt(int i)
   cout << "--------------------------------------" << endl;
   for(int n = 0; n < i; n++)
   {
-    cout << storeNumber[n] << " " << setw(16) << storeItem[n] << "\t\t\t\t $" << storePrice[n] << endl;
+    cout << storeNumber[n] << " " << setw(17) << storeItem[n] << "\t\t\t\t $" << storePrice[n] << endl;
   }
 
   //output to file
@@ -215,7 +215,7 @@ void displayReceipt(int i)
   outputfile << "-------------------------------" << endl;
   for (int n = 0; n < i; n++)
   {
-    outputfile <<left << storeNumber[n] << " " << setw(16) << storeItem[n] << "\t\t\t\t$" << setprecision(2) << fixed << storePrice[n] << endl;
+    outputfile <<left << storeNumber[n] << " " << setw(17) << storeItem[n] << "\t\t\t\t$" << setprecision(2) << fixed << storePrice[n] << endl;
   }
 
   for(int n = 0; n < i; n++)
@@ -224,7 +224,7 @@ void displayReceipt(int i)
   }
   //output to screen
   cout << endl;
-  // Minor changes made to allow for higher subtotals to still be in line with the receipt
+    // Minor changes made to allow for higher subtotals to still be in line with the receipt
   cout << "SUBTOTAL\t\t\t\t\t\t$" << sum << endl;
   cout << "TAX\t\t\t\t\t\t\t\t  8.5%" << endl;
 
